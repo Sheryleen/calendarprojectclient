@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react"; //useeffect 90% of lifecycle methos built into one
+import { connect } from "react-redux";
+import { fetchAllAppointments } from "./store/appointments/actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//useEffect requires 2 arguments
+//1st argument should be a/k/a componentDidMount
+function App(props) {
+  useEffect(() => {
+    props.fetchAllAppointments();
+  }, []);
+  return <div></div>;
 }
 
-export default App;
+export default connect(
+  null,
+  { fetchAllAppointments }
+)(App);
