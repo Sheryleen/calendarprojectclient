@@ -28,13 +28,28 @@ export default (state = initialState, action) => {
     case types.ADD_APPOINTMENT_SUCCESS:
       return {
         ...state,
-        all: [...state.all, action.payload]
+        all: [...state.all, action.payload[0]]
       };
     case types.REMOVE_APPOINTMENT_SUCCESS:
       return {
         ...state,
-        all: state.all.filter(APPOINTMENT => APPOINTMENT.id === action.payload.id)
+        //take array from payload give all then the deleted one
+        all: state.all.filter(
+          APPOINTMENT => APPOINTMENT.id !== action.payload[0].id
+        )
       };
+    case types.UPDATE_APPOINTMENT_SUCCESS://once changed look for one came back and change to the one that came back
+      return {
+        ...state,
+        all: state.all.map(appt => {
+          if (appt.id === action.payload[0].id) {
+            return action.payload[0];
+          } else {
+            return appt;
+          }
+        })
+      };
+
     default:
       return state;
   }

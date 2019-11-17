@@ -76,3 +76,20 @@ export const removeAppointment = id => async dispatch => {
     });
   }
 };
+export const updateAppointment = updatedAppointment => async dispatch => {
+  dispatch({
+    type: types.UPDATE_APPOINTMENT_PENDING
+  });
+  try {
+    let response = await axios.patch(BASE_URL +`/${updatedAppointment.id}`, updatedAppointment);
+    dispatch({
+      type: types.UPDATE_APPOINTMENT_SUCCESS,
+      payload: response.data
+    });
+  } catch (err) {
+    dispatch({
+      type: types.UPDATE_APPOINTMENT_FAILED,
+      payload: err
+    });
+  }
+};

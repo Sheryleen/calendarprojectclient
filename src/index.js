@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-//imported provder injected store into app component
-//app and children have access to the connect component
 
 ReactDOM.render(
   <Provider store={store}>
